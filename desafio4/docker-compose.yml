@@ -1,0 +1,22 @@
+services:
+  servicea:
+    build: ./serviceA
+    container_name: desafio4-servicea
+    ports:
+      - "5000:5000"
+    networks:
+      - minha_rede
+
+  serviceb:
+    build: ./serviceB
+    container_name: desafio4-serviceb
+    ports:
+      - "6000:6000"
+    depends_on:
+      - servicea
+    networks:
+      - minha_rede
+
+networks:
+  minha_rede:
+    driver: bridge

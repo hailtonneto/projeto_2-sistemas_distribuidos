@@ -1,0 +1,29 @@
+services:
+  servicea:
+    build: ./serviceA
+    container_name: desafio5-servicea
+    networks:
+      - minha_rede
+
+  serviceb:
+    build: ./serviceB
+    container_name: desafio5-serviceb
+    depends_on:
+      - servicea
+    networks:
+      - minha_rede
+
+  gateway:
+    build: ./gateway
+    container_name: desafio5-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - servicea
+      - serviceb
+    networks:
+      - minha_rede
+
+networks:
+  minha_rede:
+    driver: bridge
